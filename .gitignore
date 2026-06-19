@@ -1,0 +1,52 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.so
+
+# Environment & secrets
+.env
+.env.*
+*.key
+
+# Model cache (large files — re-downloaded on first run)
+~/.cache/torch/
+~/.cache/huggingface/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.local
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/workspace.xml
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/shelf/
+.vscode/
+
+# Uploaded audio (temp files)
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.m4a
+*.aac

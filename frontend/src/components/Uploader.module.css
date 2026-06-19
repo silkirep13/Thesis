@@ -1,0 +1,74 @@
+.wrapper { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+
+.dropzone {
+  width: 100%;
+  max-width: 520px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--surface);
+}
+
+.dropzone:hover { border-color: var(--gold-dim); }
+.dragOver { border-color: var(--gold) !important; background: #1e1a0e; }
+.hasFile { border-style: solid; border-color: var(--gold-dim); }
+
+.uploadIcon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+.fileIcon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--gold);
+}
+
+.dropText { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+.fileName { font-size: 1rem; font-weight: 600; color: var(--gold); margin-bottom: 4px; word-break: break-all; }
+.fileMeta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+.hint { font-size: 0.78rem; color: var(--text-muted); }
+
+.analyzeBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 40px;
+  background: var(--gold);
+  color: #0d0f14;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: 0.02em;
+}
+
+.analyzeBtn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.analyzeBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #0d0f1460;
+  border-top-color: #0d0f14;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loadingHint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: -4px;
+}

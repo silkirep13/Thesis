@@ -1,0 +1,27 @@
+.wrap {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.tooltip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: var(--text);
+}
+
+.ttTime {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.ttCents {
+  color: var(--gold);
+  font-family: monospace;
+  font-size: 0.76rem;
+}

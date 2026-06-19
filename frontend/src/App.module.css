@@ -1,0 +1,98 @@
+.app { display: flex; flex-direction: column; min-height: 100vh; }
+
+.header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  padding: 20px 0;
+}
+
+.headerInner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleGroup { display: flex; flex-direction: column; gap: 2px; }
+
+.subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.main {
+  flex: 1;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  align-self: flex-start;
+}
+
+.sectionDesc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  align-self: flex-start;
+  max-width: 560px;
+}
+
+.sectionDesc code {
+  background: var(--surface2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--gold);
+  font-size: 0.85em;
+}
+
+.errorBox {
+  width: 100%;
+  max-width: 520px;
+  background: #2e1a1a;
+  border: 1px solid #5a2020;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.875rem;
+  color: #f87171;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
