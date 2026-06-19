@@ -36,11 +36,7 @@ Thumbs.db
 desktop.ini
 
 # IDE
-.idea/workspace.xml
-.idea/httpRequests/
-.idea/dataSources/
-.idea/dataSources.local.xml
-.idea/shelf/
+.idea/
 .vscode/
 
 # Uploaded audio (temp files)
