@@ -123,6 +123,12 @@
   text-transform: capitalize;
 }
 
+/* Named by the trained classifier, not just a stem-energy category */
+.instTagClassified {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
 .notice {
   font-size: 0.75rem;
   color: var(--text-muted);

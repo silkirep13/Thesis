@@ -1,0 +1,60 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.svg {
+  width: 100%;
+  height: 160px;
+  background: var(--surface2);
+  border-radius: 8px;
+}
+
+.guideLine {
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+.noteGroup {
+  cursor: default;
+}
+
+.noteRect {
+  stroke: none;
+}
+
+.noteText {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  fill: #0b0b0b;
+  pointer-events: none;
+}
+
+.natural   { fill: var(--text-muted); }
+.quarterTone { fill: var(--gold); }
+.fullAccidental { fill: #f87171; }
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}

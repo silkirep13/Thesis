@@ -16,6 +16,21 @@ app.add_middleware(
 ALLOWED_EXTENSIONS = {".mp3", ".wav", ".flac", ".ogg", ".m4a", ".aac"}
 
 
+class ModeInfo(BaseModel):
+    tradition: str
+    alt_name: str | None = None
+    description: str
+
+
+class NoteEvent(BaseModel):
+    start_s: float
+    end_s: float
+    degree: int
+    cents_from_tonic: float
+    deviation_cents: float
+    accidental: str
+
+
 class AnalysisResult(BaseModel):
     filename: str
     file_size_kb: float
@@ -35,6 +50,12 @@ class AnalysisResult(BaseModel):
     pitch_times: list[float]
     pitch_contour: list[float | None]
     tonic_hz: float | None
+    mode_info: ModeInfo | None
+    notation: list[NoteEvent]
+    genus: str | None
+    tie_group_size: int
+    melody_instrument: str | None
+    melody_instrument_confidence: float
 
 
 @app.get("/health")

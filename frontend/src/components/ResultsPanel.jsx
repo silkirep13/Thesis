@@ -1,5 +1,7 @@
 import styles from './ResultsPanel.module.css'
 import PitchChart from './PitchChart'
+import ModeInfoCard from './ModeInfoCard'
+import NotationStrip from './NotationStrip'
 
 export default function ResultsPanel({ data }) {
   if (!data) return null
@@ -25,6 +27,8 @@ export default function ResultsPanel({ data }) {
         </div>
       </div>
 
+      <ModeInfoCard info={data.mode_info} genus={data.genus} tieGroupSize={data.tie_group_size} />
+
       <div className={styles.grid}>
         <Stat label="Mean Pitch" value={`${data.mean_pitch_hz} Hz`} />
         <Stat label="Pitch Range" value={`${data.pitch_range_cents} ¢`} />
@@ -44,6 +48,16 @@ export default function ResultsPanel({ data }) {
             tonicHz={data.tonic_hz}
             tonicName={data.tonic}
           />
+        </div>
+      )}
+
+      {data.notation?.length > 0 && (
+        <div className={styles.section}>
+          <span className={styles.label}>Scale-Degree Transcription</span>
+          <p className={styles.sectionHint}>
+            Each segmented note snapped to the nearest degree of {data.detected_mode} · symbol shows deviation from that degree's theoretical position
+          </p>
+          <NotationStrip notes={data.notation} />
         </div>
       )}
 
@@ -79,9 +93,19 @@ export default function ResultsPanel({ data }) {
           <span className={styles.label}>Detected Instruments</span>
           <div className={styles.tags}>
             {data.detected_instruments.map((inst, i) => (
-              <span key={i} className={styles.instTag}>{inst}</span>
+              <span
+                key={i}
+                className={`${styles.instTag} ${inst === data.melody_instrument ? styles.instTagClassified : ''}`}
+              >
+                {inst}
+              </span>
             ))}
           </div>
+          <p className={styles.sectionHint}>
+            {data.melody_instrument
+              ? `Melody instrument identified by the trained classifier (${Math.round(data.melody_instrument_confidence * 100)}% confidence) · other labels are stem-energy categories`
+              : 'Broad stem-energy categories — the melody instrument could not be named confidently enough to identify a specific instrument'}
+          </p>
         </div>
       )}
 
