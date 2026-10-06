@@ -1,6 +1,6 @@
 """ Trains a classical ML instrument classifier (Random Forest) on features
 produced by prepare_dataset.py, using a VIDEO-LEVEL train/test split to
-avoid data leakage between clips cut from the same recording — clips
+avoid data leakage between clips cut from the same recording, clips
 from one video share mic/room/player, so a per-clip random split would
 report inflated accuracy that doesn't reflect real generalization.
 Usage:
@@ -32,10 +32,10 @@ def load_manifest(data_dir: Path):
 
 def video_level_split(rows: list[dict], test_videos_per_class: int, seed: int = 42):
     """ For each instrument, hold out `test_videos_per_class` distinct source
-    videos entirely for testing. Never split individual clips randomly —
+    videos entirely for testing. Never split individual clips randomly,
     clips from the same video leak recording-condition information that
     would let the model "cheat" instead of learning the instrument's timbre.
-    Keys are (instrument, source_file) pairs, not bare filenames — source
+    Keys are (instrument, source_file) pairs, not bare filenames, source
     files are only unique within their instrument folder (e.g. two
     different instruments' clips both named "v1.wav" are unrelated
     recordings and must not be conflated)."""
@@ -80,7 +80,7 @@ def main():
 
     if not test_idx:
         raise SystemExit(
-            "No test videos held out — need at least a few videos per instrument "
+            "No test videos held out, need at least a few videos per instrument "
             "before a meaningful video-level split is possible."
         )
 

@@ -13,8 +13,8 @@ const EXPORT_SCALE = 2            // 2x the on-screen size, for a crisp image
 /**
  * Rasterise the engraved SVG to a PNG blob.
  *
- * PNG rather than JPEG: a score is line art — thin staff lines, stems and
- * quarter-tone accidentals — which JPEG's block compression smears into
+ * PNG rather than JPEG: a score is line art, thin staff lines, stems and
+ * quarter-tone accidentals, which JPEG's block compression smears into
  * visible artefacts. PNG is lossless and compresses flat white backgrounds
  * extremely well, so it is both sharper and usually smaller here.
  */
@@ -220,7 +220,7 @@ export default function ScoreView({ musicxml, tempoBpm, pulseStrength, metrical,
         {metrical
           ? 'Εντοπίστηκε σταθερός παλμός και οι διάρκειες μετρήθηκαν ως προς αυτόν. Η '
             + 'παρτιτούρα δεν φέρει ένδειξη μέτρου: το σύστημα αναγνωρίζει ότι υπάρχει '
-            + 'παλμός, όχι πόσοι χτύποι συγκροτούν το μέτρο — κρίσιμο σε ρεπερτόριο με '
+            + 'παλμός, όχι πόσοι χτύποι συγκροτούν το μέτρο, κρίσιμο σε ρεπερτόριο με '
             + '7/8 και 9/8.'
           : 'Δεν εντοπίστηκε σταθερός παλμός, οπότε η μεταγραφή αποδίδεται χωρίς μέτρο '
             + 'και οι διάρκειες είναι σχετικές. Αυτό είναι το αναμενόμενο για βυζαντινό '

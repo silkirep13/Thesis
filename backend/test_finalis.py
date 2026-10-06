@@ -14,7 +14,7 @@ MINOR = "Greek Minor (Minore)"
 # Scores shaped like a real measurement: one tonic edges out the tonic a
 # fourth below it by about two per cent, because the two scales differ in a
 # single pitch class. That is the margin the finalis exists to overrule.
-# These mode names are only convenient labels for the fixture — in the
+# These mode names are only convenient labels for the fixture: in the
 # pipeline this function is reached for Byzantine chant, where the closing
 # note is held long enough to be trusted. See the note at the call site for
 # the measurements that kept it away from Greek folk.

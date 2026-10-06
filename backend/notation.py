@@ -1,4 +1,4 @@
-""" Score generation — turns the note-level transcription into MusicXML.
+""" Score generation, turns the note-level transcription into MusicXML.
 Two things set this repertoire apart from the Western music most notation
 tools assume. Its rhythm is often free rather than metrical, so the pulse is
 measured first and only material that really has one is barred. Its modes
@@ -138,14 +138,14 @@ def build_score(
 
     # No time signature is ever written. The analysis can establish THAT a
     # steady pulse exists, but not how many beats make a bar, and this
-    # repertoire is full of 7/8 and 9/8 — stamping 4/4 on a kalamatianos
+    # repertoire is full of 7/8 and 9/8, stamping 4/4 on a kalamatianos
     # would assert a metre that was never measured. What was measured, the
     # tempo and whether a pulse was found at all, is stated instead.
     if metrical:
         part.append(expressions.TextExpression(
-            f"παλμός ≈{round(tempo_bpm)} BPM — μέτρο μη προσδιορισμένο"))
+            f"παλμός ≈{round(tempo_bpm)} BPM, μέτρο μη προσδιορισμένο"))
     else:
-        part.append(expressions.TextExpression("senza misura — ελεύθερος ρυθμός"))
+        part.append(expressions.TextExpression("senza misura, ελεύθερος ρυθμός"))
 
     quarter_seconds = _reference_quarter(notes, tempo_bpm, metrical)
 

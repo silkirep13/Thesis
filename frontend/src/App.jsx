@@ -56,7 +56,7 @@ export default function App() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Select Tradition</h2>
           <p className={styles.sectionDesc}>
-            Choose the musical tradition before uploading — this restricts mode
+            Choose the musical tradition before uploading. This restricts mode
             detection to the correct scale family and avoids cross-tradition confusion.
           </p>
           <TraditionSelector value={tradition} onChange={handleTraditionChange} />
@@ -89,7 +89,7 @@ export default function App() {
       </main>
 
       <footer className={styles.footer}>
-        <span>MIR Thesis — Byzantine &amp; Eastern Music · Stack: FastAPI · React · librosa · CREPE · Demucs · YAMNet · music21</span>
+        <span>MIR Thesis, Byzantine &amp; Eastern Music · Stack: FastAPI · React · librosa · CREPE · Demucs · YAMNet · music21</span>
       </footer>
     </div>
   )

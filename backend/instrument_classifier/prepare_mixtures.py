@@ -2,15 +2,15 @@
 The deployed classifier answers "which one instrument is this?" because it
 was trained on solo material and emits a single label. Recognising several
 instruments at once needs training data where several are playing and the
-answer is known. Rather than collect new recordings — ensemble material with
-reliable per-instrument ground truth barely exists for these traditions — we
+answer is known. Rather than collect new recordings, ensemble material with
+reliable per-instrument ground truth barely exists for these traditions, we
 synthesise it: mixing two or three solo clips gives a mixture whose contents
 are known exactly, because we chose them.
 Two constraints make the result trustworthy, and both are easy to get wrong:
 SPLIT. Mixtures must be built from recordings on one side of the
 train/test split only. A test mixture containing a clip from a training
 recording re-introduces exactly the leakage the recording-level split exists
-to prevent — the model would recognise the recording, not the instruments.
+to prevent, the model would recognise the recording, not the instruments.
 The split here is computed with the same rule and seed as train.py.
 PLAUSIBILITY. Instruments are combined only within a tradition. A bouzouki
 and an oud never play together, so teaching the model to expect that
@@ -97,7 +97,7 @@ def _generate(side: dict, instruments: list[str], n_mixtures: int, rng,
     }
     usable = {t: m for t, m in usable.items() if len(m) >= 1}
     if not usable:
-        raise SystemExit(f"[{label}] no usable traditions — check the raw data layout")
+        raise SystemExit(f"[{label}] no usable traditions, check the raw data layout")
 
     idx = {name: i for i, name in enumerate(instruments)}
     feats, labels, sizes = [], [], []
@@ -151,7 +151,7 @@ def _generate(side: dict, instruments: list[str], n_mixtures: int, rng,
             print(f"  [{label}] {n + 1}/{n_mixtures}")
 
     counts = {s: sizes.count(s) for s in sorted(set(sizes))}
-    print(f"  [{label}] built {len(feats)} mixtures — sizes {counts}")
+    print(f"  [{label}] built {len(feats)} mixtures, sizes {counts}")
     return np.stack(feats), np.stack(labels)
 
 

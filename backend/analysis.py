@@ -1,9 +1,9 @@
 """
-DSP/MIR analysis pipeline — split architecture:
+DSP/MIR analysis pipeline, split architecture:
 
-  1. HPSS           — isolate harmonic content (helps both stages)
-  2. Chroma (CQT)   — mode & tonic detection   [polyphonic-safe]
-  3. pYIN           — microtonal deviations     [monophonic only, flagged when unreliable]
+  1. HPSS: isolate harmonic content (helps both stages)
+  2. Chroma (CQT): mode & tonic detection   [polyphonic-safe]
+  3. pYIN: microtonal deviations     [monophonic only, flagged when unreliable]
 
 CREPE slot: replace _extract_pitch() once crepe/torchcrepe supports Python 3.14+.
 """
@@ -20,7 +20,7 @@ UNIT_CENTS = {"72-EDO": 1200 / 72, "24-EDO": 1200 / 24, "12-TET": 1200 / 12}
 
 
 def _cents_from_steps(steps: list[int], basis: str) -> list[int]:
-    """Cumulative cents from a step pattern — the single source of truth
+    """Cumulative cents from a step pattern, the single source of truth
     cents are derived from, so steps and cents can never silently diverge."""
     unit = UNIT_CENTS[basis]
     cum = 0.0
@@ -84,7 +84,7 @@ MODE_INFO: dict[str, dict[str, str]] = {
     "Mode 2 – Deuteros": {
         "tradition": "Byzantine Chant",
         "alt_name": "Ήχος Δεύτερος (Second Mode)",
-        "description": "Natively in the soft chromatic genus — its 233¢ step is an "
+        "description": "Natively in the soft chromatic genus, its 233¢ step is an "
                         "augmented-second leap, giving it a more pungent color than the purely "
                         "diatonic echoi. Kyrios form of the Deuteros–Plagios B' pair.",
     },
@@ -97,7 +97,7 @@ MODE_INFO: dict[str, dict[str, str]] = {
     "Mode 4 – Tetartos": {
         "tradition": "Byzantine Chant",
         "alt_name": "Ήχος Τέταρτος (Fourth Mode)",
-        "description": "Diatonic authentic mode with a narrow 133¢ second step — one of the "
+        "description": "Diatonic authentic mode with a narrow 133¢ second step, one of the "
                         "most melodically flexible modes of the Octoechos. Kyrios form of the "
                         "Tetartos–Plagios D' pair.",
     },
@@ -111,7 +111,7 @@ MODE_INFO: dict[str, dict[str, str]] = {
     "Mode 6 – Plagios B'": {
         "tradition": "Byzantine Chant",
         "alt_name": "Ήχος Πλάγιος Δευτέρου (Plagal of the Second)",
-        "description": "Natively in the hard chromatic genus — its 333¢ step is a wider "
+        "description": "Natively in the hard chromatic genus, its 333¢ step is a wider "
                         "augmented second than Deuteros's, producing the pungent, Hijaz-like "
                         "color traditionally associated with penitential hymns. Plagal "
                         "counterpart of Deuteros; the melody dwells beneath the finalis.",
@@ -120,7 +120,7 @@ MODE_INFO: dict[str, dict[str, str]] = {
         "tradition": "Byzantine Chant",
         "alt_name": "Ήχος Βαρύς (Grave Mode)",
         "description": "Plagal counterpart of Tritos, traditionally named 'Barys' (grave/heavy) "
-                        "for its low tessitura — one of only two plagal modes in the Octoechos "
+                        "for its low tessitura, one of only two plagal modes in the Octoechos "
                         "with its own name rather than a numbered 'Plagios' label.",
     },
     "Mode 8 – Plagios D'": {
@@ -151,14 +151,14 @@ MODE_INFO: dict[str, dict[str, str]] = {
     "Cypriot Pentachord": {
         "tradition": "Cypriot Folk",
         "description": "Scale associated with traditional Cypriot folk song, intervallically "
-                        "close to the Byzantine diatonic Protos scale — reflecting Cyprus's "
+                        "close to the Byzantine diatonic Protos scale, reflecting Cyprus's "
                         "close historical ties to Byzantine musical tradition.",
     },
 
     "Maqam Rast": {
         "tradition": "Arabic Maqam",
-        "description": "One of the foundational maqamat, built on a neutral third (~350¢) — "
-                        "neither major nor minor — considered the reference scale of the Arabic "
+        "description": "One of the foundational maqamat, built on a neutral third (~350¢), "
+                        "neither major nor minor, considered the reference scale of the Arabic "
                         "maqam system.",
     },
     "Maqam Bayati": {
@@ -169,7 +169,7 @@ MODE_INFO: dict[str, dict[str, str]] = {
     "Maqam Hijaz": {
         "tradition": "Arabic Maqam",
         "description": "Recognizable by its augmented-second interval (100¢–400¢) between the "
-                        "2nd and 3rd degrees — the maqam most associated with Middle Eastern "
+                        "2nd and 3rd degrees, the maqam most associated with Middle Eastern "
                         "music in popular perception.",
     },
     "Maqam Nahawand": {
@@ -267,7 +267,7 @@ _INSTRUMENT_MODEL_PATH = (
 
 def _get_instrument_model():
     """ Load the trained instrument classifier once and cache it.
-    Returns None if the model file is missing or unloadable — the classifier
+    Returns None if the model file is missing or unloadable, the classifier
     is an enhancement over the RMS heuristic, not a hard dependency, so the
     pipeline degrades to generic melody labels rather than failing the whole
     analysis. The failure is latched so a missing model doesn't re-raise (and
@@ -280,7 +280,7 @@ def _get_instrument_model():
         except Exception as e:
             _INSTRUMENT_LOAD_FAILED = True
             print(
-                f"[instrument_classifier] model unavailable ({e}) — "
+                f"[instrument_classifier] model unavailable ({e}), "
                 f"falling back to generic melody labels",
                 file=sys.stderr, flush=True,
             )
@@ -296,7 +296,7 @@ def _classify_melody_instrument(
     Demucs `other` stem, restricted to instruments valid for `tradition`.
     Returns (label, confidence), or (None, confidence) when the model is
     unavailable, there's no melody stem, or confidence is too low to name
-    an instrument honestly — the caller then keeps the generic label."""
+    an instrument honestly, the caller then keeps the generic label."""
     if "other" not in stems:
         return None, 0.0
 
@@ -371,8 +371,8 @@ def _detect_instruments(
 
     `melody_instrument`, when given, is the specific instrument named by the
     trained classifier (e.g. "Bouzouki") and replaces the generic
-    tradition-wide melody label for the `other` stem. When it is None — model
-    unavailable, or confidence too low to name an instrument honestly — the
+    tradition-wide melody label for the `other` stem. When it is None, model
+    unavailable, or confidence too low to name an instrument honestly, the
     generic label is used instead."""
     if not stems:
         return []
@@ -411,7 +411,7 @@ def _keep_tail(audio: np.ndarray, sr: int) -> np.ndarray:
     Every tonic-resolution mechanism in this pipeline (end-weighted chroma
     mean, finalis anchoring for kyrios/plagal and Arabic neutral-interval
     refinement, and tonic-by-finalis) depends on the analyzed clip's ending
-    being the piece's ACTUAL ending — Byzantine/Arabic melodies reliably
+    being the piece's ACTUAL ending, Byzantine/Arabic melodies reliably
     resolve to their tonic there. Truncating from the start instead would
     silently discard that ending for any recording longer than
     MAX_DURATION, which is the common case for real chant/taksim
@@ -470,7 +470,7 @@ def analyze_audio(file_bytes: bytes, filename: str, tradition: str | None = None
 
     # The voice carries the melody whenever there is one, and the instruments
     # follow it, so the transcription is taken from the vocal stem whenever
-    # singing is present at all — not merely when it happens to be the loudest
+    # singing is present at all, not merely when it happens to be the loudest
     # part of the mix. Instrumental stems are used only for pieces with no
     # singing in them.
     if stems:
@@ -518,9 +518,9 @@ def analyze_audio(file_bytes: bytes, filename: str, tradition: str | None = None
         # was tried and withdrawn: chant holds its finalis for a long closing
         # note, but a strophic folk song's last sung seconds simply dwell on
         # whatever the melody dwells on, which is as often the third as the
-        # tonic. Measured on two recordings with the answer known — "Μήλο μου
+        # tonic. Measured on two recordings with the answer known, "Μήλο μου
         # κόκκινο", where the ending gives the right tonic and chroma does
-        # not, and "Σαμιώτισσα", where the reverse holds — the ending's
+        # not, and "Σαμιώτισσα", where the reverse holds, the ending's
         # leading pitch class wins by a ratio of 1.48 and 1.33 respectively,
         # and the chroma gap is 0.036 against 0.055. No threshold separates
         # the two cases; one fitted to them would be memorising them. Greek
@@ -576,7 +576,7 @@ def analyze_audio(file_bytes: bytes, filename: str, tradition: str | None = None
         # Quarter-tone accidentals are written only where they carry meaning.
         # The Greek modes are defined in 12-TET, so every degree of them is a
         # piano key and any microtone in the score is expressive intonation
-        # rather than structure — it belongs in the deviation figures, not on
+        # rather than structure, it belongs in the deviation figures, not on
         # the staff, where it prints symbols musicians do not read. The
         # Byzantine and Arabic modes are defined in 72- and 24-EDO, where the
         # neutral intervals ARE the mode, and rounding them away would erase
@@ -637,7 +637,7 @@ def analyze_audio(file_bytes: bytes, filename: str, tradition: str | None = None
 
 
 def _extract_pitch(audio: np.ndarray, sr: int):
-    """ CREPE CNN pitch tracker — cent-level accuracy on monophonic audio.
+    """ CREPE CNN pitch tracker, cent-level accuracy on monophonic audio.
     model_capacity='medium' balances speed and accuracy well for thesis use.
     Outputs match pYIN's (f0, voiced_flag, voiced_probs) interface."""
     import crepe
@@ -663,12 +663,12 @@ def _detect_mode_chroma(
     sr: int,
     templates: dict[str, np.ndarray] | None = None,
 ) -> tuple[str, str, float, frozenset[tuple[int, str]], dict[tuple[int, str], float]]:
-    """ Joint (tonic, mode) detection — exhaustive search over all 12 tonics × all
+    """ Joint (tonic, mode) detection, exhaustive search over all 12 tonics × all
     mode templates. Avoids the cascade failure of detect-tonic-first approaches.
     Chroma is time-weighted: the final 25 % of the recording gets 2× weight
     because the Byzantine finalis always appears at cadences, not necessarily
     as the most frequent pitch class overall. In recitative liturgical chant
-    this weighting can still be insufficient — a "reciting tone" sung for
+    this weighting can still be insufficient, a "reciting tone" sung for
     most of the text can dominate the histogram by sheer duration even
     within the weighted final quarter, out-scoring the true tonic's family.
     See _resolve_tonic_by_finalis, which trusts the literal final note over
@@ -678,7 +678,7 @@ def _detect_mode_chroma(
     tie group (every (tonic_idx, mode_name) within _MODE_TIE_EPSILON of the
     winning score), so
     callers can tell an unambiguous match from one settled by a tiebreak
-    (e.g. Protos/Plagios A', which are identical at any chroma resolution —
+    (e.g. Protos/Plagios A', which are identical at any chroma resolution,
     see KYRIOS_TO_PLAGAL)."""
     chroma = librosa.feature.chroma_cqt(y=audio, sr=sr, bins_per_octave=36, n_chroma=36)
 
@@ -758,28 +758,28 @@ def _resolve_tonic_by_finalis(
     midi_cents: np.ndarray,
 ) -> tuple[str, str]:
     """ Prefer the tonic the melody actually ends on over the whole-clip chroma
-    match, whenever they disagree — not just when the chroma winner is part
+    match, whenever they disagree, not just when the chroma winner is part
     of an exact tie.
     Two separate reasons chroma-only tonic detection can be wrong even
     without a mathematical tie:
     1)  The diatonic genus is a rotational system (Protos/Plagios A' at one
         tonic are chroma-identical to Tetartos a 4th above and Plagios D' a
-        2nd below; Tritos/Barys tie a 4th apart) — a real, imperfect
+        2nd below; Tritos/Barys tie a 4th apart), a real, imperfect
         recording rarely lands on an EXACT tie between family members, but
         can easily score a nearby family highest by a small margin due to
         noise, without the true family entering contention at all.
     2)  Recitative liturgical chant can spend most of its duration on a
         "reciting tone" a step or so above the true tonic, which dominates
         the whole-clip chroma histogram by sheer duration even after
-        end-weighting — outscoring the true tonic's family entirely rather
+        end-weighting, outscoring the true tonic's family entirely rather
         than merely tying it.
     Byzantine chant reliably resolves to its tonic at the end regardless of
-    either effect — a stronger, more theoretically grounded signal than the
+    either effect, a stronger, more theoretically grounded signal than the
     overall chroma shape for TONIC identification specifically. This anchors
     the tonic from the last 15% of confident CREPE frames (mirroring
     _refine_kyrios_plagal / _refine_arabic_maqam) and, if it disagrees with
     the chroma winner, switches to whichever mode scores best at that
-    finalis-confirmed tonic — chroma is still trusted to pick the mode/genus
+    finalis-confirmed tonic, chroma is still trusted to pick the mode/genus
     once the tonic itself is settled."""
     if midi_cents.size < 20:
         return tonic_name, mode
@@ -887,14 +887,14 @@ def _refine_arabic_maqam(
         Maqam Ajam  (400 ¢ 3rd)  ↔  Maqam Rast   (350 ¢ neutral 3rd)
 
     Strategy (mirrors _refine_kyrios_plagal):
-    1)  Derive the actual tonic from the ending 15 % of CREPE frames — the
+    1)  Derive the actual tonic from the ending 15 % of CREPE frames, the
         finalis of a taksim nearly always appears there, and CREPE gives
         better pitch-class accuracy than chroma for short passages.
     2)  Compute every frame's interval relative to that tonic (pitch-class,
         mod 1200 ¢).
     3)  Gather frames that fall in the ambiguous degree window.
     4)  Check whether the median is closer to current_deg or alt_deg.
-    Returns (mode, tonic_name) — tonic may also be corrected when the
+    Returns (mode, tonic_name), tonic may also be corrected when the
     chroma search was off by a semitone or two."""
     if mode not in _ARABIC_REFINE or midi_cents.size < 20:
         return mode, tonic_name
@@ -915,7 +915,7 @@ def _refine_arabic_maqam(
     if in_window.size < min_frames:
         print(
             f"[arabic_refine] {mode}/{tonic_name}: only {in_window.size} frames "
-            f"in [{lo},{hi}] ¢ — skipping (tonic_refined={refined_tonic})",
+            f"in [{lo},{hi}] ¢, skipping (tonic_refined={refined_tonic})",
             file=sys.stderr, flush=True,
         )
         return mode, refined_tonic
@@ -982,7 +982,7 @@ def _segment_notes(
     """ Segment the confident CREPE pitch contour into discrete notes.
     Within each contiguous run of confident frames, splits at cent jumps
     larger than `_NOTE_JUMP_CENTS` (a new note) AND at any given
-    `onset_frames` (attack transients detected independently of pitch —
+    `onset_frames` (attack transients detected independently of pitch,
     catches a re-articulated note at the same pitch, which a pitch-jump
     split alone would miss). Discards segments shorter than
     `min_note_frames` (spurious blips), then for each remaining segment
@@ -1080,7 +1080,7 @@ def _microtonal_deviations(midi_cents: np.ndarray) -> list[str]:
 
 
 def _robust_pitch_range(midi_cents: np.ndarray) -> int:
-    """IQR-based range — ignores octave-error outliers from pYIN."""
+    """IQR-based range, ignores octave-error outliers from pYIN."""
     p5  = np.percentile(midi_cents, 5)
     p95 = np.percentile(midi_cents, 95)
     return int(p95 - p5)
@@ -1094,7 +1094,7 @@ def _empty_result(filename: str, duration: float, size_bytes: int) -> dict:
         "filename":             filename,
         "file_size_kb":         round(size_bytes / 1024, 1),
         "detected_mode":        "Undetected",
-        "tonic":                "—",
+        "tonic":                "-",
         "confidence":           0.0,
         "mean_pitch_hz":        0.0,
         "pitch_range_cents":    0,

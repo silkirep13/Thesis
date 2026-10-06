@@ -89,7 +89,7 @@ export default function Uploader({ onAnalyze, loading }) {
       </button>
       {loading && (
         <p className={styles.loadingHint}>
-          Source separation takes ~2–4 min on CPU for a full-length recording — please wait
+          Source separation takes ~2–4 min on CPU for a full-length recording. Please wait
         </p>
       )}
     </div>

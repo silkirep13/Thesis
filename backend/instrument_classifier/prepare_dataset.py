@@ -1,7 +1,7 @@
 """Turns raw instrument recordings into the feature table the classifier trains on.
 Each recording is cut into fixed-length clips and every clip is described by a
 vector of numbers, either hand-designed descriptors or pretrained embeddings.
-Expected input layout — one subfolder per instrument, any audio format:
+Expected input layout: one subfolder per instrument, any audio format:
     raw_dir/
       oud/
         video1.mp3
@@ -153,7 +153,7 @@ def main():
             print(f"  {f.name}: {n_clips} clips")
 
     if not rows:
-        raise SystemExit("No usable clips extracted — check silence threshold / audio files.")
+        raise SystemExit("No usable clips extracted, check silence threshold / audio files.")
 
     manifest_path = out_dir / "manifest.csv"
     with open(manifest_path, "w", newline="", encoding="utf-8") as f:

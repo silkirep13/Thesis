@@ -88,7 +88,7 @@ export default function ResultsPanel({ data }) {
         </p>
         {!data.microtonal_reliable && (
           <div className={styles.warning}>
-            ⚠ Voiced frame rate too low ({Math.round(data.voiced_frames / data.total_frames * 100)}%) — likely choir or polyphonic recording. Microtonal analysis requires a solo/monophonic source.
+            ⚠ Voiced frame rate too low ({Math.round(data.voiced_frames / data.total_frames * 100)}%), likely choir or polyphonic recording. Microtonal analysis requires a solo/monophonic source.
           </div>
         )}
         <div className={styles.tags}>
@@ -103,7 +103,7 @@ export default function ResultsPanel({ data }) {
                 )
               })
             : <span className={styles.empty}>
-                {data.microtonal_reliable ? 'No pitch data' : 'Unavailable — see warning above'}
+                {data.microtonal_reliable ? 'No pitch data' : 'Unavailable, see warning above'}
               </span>
           }
         </div>
@@ -125,7 +125,7 @@ export default function ResultsPanel({ data }) {
           <p className={styles.sectionHint}>
             {data.melody_instrument
               ? `Melody instrument identified by the trained classifier (${Math.round(data.melody_instrument_confidence * 100)}% confidence) · other labels are stem-energy categories`
-              : 'Broad stem-energy categories — the melody instrument could not be named confidently enough to identify a specific instrument'}
+              : 'Broad stem-energy categories, the melody instrument could not be named confidently enough to identify a specific instrument'}
           </p>
         </div>
       )}

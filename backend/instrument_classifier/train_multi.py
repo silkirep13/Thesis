@@ -117,7 +117,7 @@ def main():
         multi_exact = float(np.mean((pred == y_te).all(axis=1)))
         print(f"\n  multi-label exact-set accuracy         : {multi_exact:.3f}")
     else:
-        print(f"[baseline skipped — {sl_path} not found]")
+        print(f"[baseline skipped, {sl_path} not found]")
 
     Path(args.out_model).parent.mkdir(parents=True, exist_ok=True)
     joblib.dump({"model": clf, "instruments": instruments,

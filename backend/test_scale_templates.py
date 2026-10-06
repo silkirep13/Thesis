@@ -36,7 +36,7 @@ check("Mode 8 – Plagios D'" in byzantine_pool, "Mode 8 missing from competitio
 for old_genus_name in ("Chromatic – Hard", "Chromatic – Soft", "Enharmonic"):
     check(
         old_genus_name not in SCALE_TEMPLATES,
-        f"{old_genus_name} should no longer exist as a separate template — "
+        f"{old_genus_name} should no longer exist as a separate template, "
         f"it's a duplicate of an echos, now expressed via that echos's `genus` field",
     )
 
@@ -76,7 +76,7 @@ found_cross_pool = {frozenset({a, b}) for a, b, _ in cross_pool_dups}
 check(
     found_cross_pool == expected_cross_pool,
     f"cross-pool duplicates {found_cross_pool} != expected {expected_cross_pool} "
-    f"(these are musicologically real and should stay — a NEW one appearing "
+    f"(these are musicologically real and should stay, a NEW one appearing "
     f"means a template regressed to an artifact-level match)",
 )
 
@@ -86,13 +86,13 @@ check(
 )
 
 if failures:
-    print(f"FAILED — {len(failures)} issue(s):")
+    print(f"FAILED: {len(failures)} issue(s):")
     for f in failures:
         print(f"  - {f}")
     sys.exit(1)
 else:
     print(
-        f"OK — {len(SCALE_TEMPLATES)} templates verified, "
+        f"OK: {len(SCALE_TEMPLATES)} templates verified, "
         f"{len(within_pool_dups)} within-pool dup(s), {len(cross_pool_dups)} cross-pool dup(s) "
         f"(all expected)."
     )
