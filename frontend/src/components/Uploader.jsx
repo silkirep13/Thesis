@@ -16,13 +16,18 @@ export default function Uploader({ onAnalyze, loading }) {
   const [stageIdx, setStageIdx]       = useState(0)
   const inputRef                      = useRef()
 
-  // Cycle through loading stage messages while waiting
+  // Cycle through loading stage messages while waiting. The counter is reset
+  // on teardown rather than at the top of the effect: resetting in the body
+  // would set state during render and trigger a cascading re-render.
   useEffect(() => {
-    if (!loading) { setStageIdx(0); return }
+    if (!loading) return
     const id = setInterval(() => {
       setStageIdx(i => (i + 1) % LOADING_STAGES.length)
     }, 8000)
-    return () => clearInterval(id)
+    return () => {
+      clearInterval(id)
+      setStageIdx(0)
+    }
   }, [loading])
 
   const accept = ['.mp3', '.wav', '.flac', '.ogg', '.m4a', '.aac']
@@ -84,7 +89,7 @@ export default function Uploader({ onAnalyze, loading }) {
       </button>
       {loading && (
         <p className={styles.loadingHint}>
-          Source separation takes ~60 s on CPU — please wait
+          Source separation takes ~2–4 min on CPU for a full-length recording — please wait
         </p>
       )}
     </div>

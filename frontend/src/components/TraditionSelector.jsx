@@ -4,12 +4,12 @@ const TRADITIONS = [
   {
     id:       'byzantine',
     label:    'Byzantine',
-    subtitle: 'Octoechos · Chromatic · Enharmonic',
+    subtitle: 'Octoechos · 8 modes',
   },
   {
     id:       'greek',
     label:    'Greek Folk',
-    subtitle: 'Minore · Hijaz',
+    subtitle: 'Matzore · Minore · Hijaz',
   },
   {
     id:       'cypriot',

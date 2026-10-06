@@ -64,9 +64,12 @@
   transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* auto-fit rather than a fixed column count: the number of statistics has
+   changed before, and a hardcoded four left an empty column that pushed the
+   boxes to one side. */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
 }
 
@@ -100,14 +103,22 @@
   gap: 12px;
 }
 
-.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
 
+/* nowrap keeps a label and its value together, so the five figures stay on
+   one row instead of breaking mid-label. */
 .tag {
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   font-family: monospace;
+  white-space: nowrap;
 }
 
 .pos { background: #1a2e1a; color: #3ecf8e; border: 1px solid #2a4a2a; }
@@ -121,6 +132,12 @@
   border: 1px solid var(--border);
   color: var(--text);
   text-transform: capitalize;
+}
+
+/* Named by the trained classifier, not just a stem-energy category */
+.instTagClassified {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 .notice {

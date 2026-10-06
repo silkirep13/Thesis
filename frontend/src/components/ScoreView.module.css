@@ -1,0 +1,75 @@
+/* min-width:0 on both the wrapper and the scroll host: a flex item defaults
+   to min-width:auto, so the very wide engraved SVG would otherwise push the
+   whole page into horizontal scroll instead of scrolling inside .host. */
+.wrap {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.metaItem { font-size: 0.78rem; color: var(--text-muted); font-family: monospace; }
+
+.pillMetric, .pillFree {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 3px 10px; border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.pillMetric { color: var(--success); }
+.pillFree   { color: var(--gold); }
+
+/* Zoom control and both download buttons sit together on the right of the
+   meta row, so the controls read as one group instead of drifting apart. */
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zoom {
+  display: flex; align-items: center; gap: 2px;
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.zoom button {
+  width: 26px; height: 26px; line-height: 1;
+  border: 0; background: var(--surface2); color: var(--text);
+  font-size: 0.95rem; cursor: pointer;
+}
+.zoom button:hover:not(:disabled) { color: var(--gold); }
+.zoom button:disabled { opacity: 0.35; cursor: default; }
+.zoomVal {
+  font-family: monospace; font-size: 0.72rem; color: var(--text-muted);
+  min-width: 38px; text-align: center;
+}
+
+.dl {
+  font-size: 0.78rem; padding: 5px 12px;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); cursor: pointer;
+}
+.dl:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+.dl:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.dl:disabled { opacity: 0.45; cursor: default; }
+
+.freeNote {
+  font-size: 0.78rem; color: var(--text-muted); margin: 0; line-height: 1.5;
+}
+
+.loading, .err { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+.err { color: #f87171; font-style: normal; }
+
+/* OSMD draws dark-on-white SVG, so it needs a light ground of its own. */
+.host {
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px 4px;
+  min-width: 0;
+  overflow-x: auto;
+  max-height: 520px;
+  overflow-y: auto;
+}

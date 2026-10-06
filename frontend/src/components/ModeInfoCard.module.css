@@ -1,0 +1,58 @@
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--gold-dim, var(--border));
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.altName {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.genusBadge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.description {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0;
+}
+
+.tieNote {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}

@@ -46,10 +46,9 @@ export default function App() {
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.titleGroup}>
-            <span className={styles.subtitle}>Thesis Project · Music Information Retrieval</span>
+            <span className={styles.subtitle}>Thesis Project - Music Information Retrieval</span>
             <h1 className={styles.title}>Byzantine & Eastern Music Analysis</h1>
           </div>
-          <div className={styles.badge}>v0.1 — Demo</div>
         </div>
       </header>
 
@@ -90,7 +89,7 @@ export default function App() {
       </main>
 
       <footer className={styles.footer}>
-        <span>MIR Thesis — Byzantine &amp; Eastern Music · Stack: FastAPI · React · librosa · CREPE · compIAM</span>
+        <span>MIR Thesis — Byzantine &amp; Eastern Music · Stack: FastAPI · React · librosa · CREPE · Demucs · YAMNet · music21</span>
       </footer>
     </div>
   )
